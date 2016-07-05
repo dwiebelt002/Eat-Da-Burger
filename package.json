@@ -1,0 +1,27 @@
+{
+  "name": "eatdaburger",
+  "version": "1.0.0",
+  "description": "A fun app that lets user input buger they want to eat using Node, Express, and Handlebars",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.6",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwiebelt002/Eat-Da-Burger.git"
+  },
+  "author": "Devin J. Wiebelt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwiebelt002/Eat-Da-Burger/issues"
+  },
+  "homepage": "https://github.com/dwiebelt002/Eat-Da-Burger#readme"
+}
