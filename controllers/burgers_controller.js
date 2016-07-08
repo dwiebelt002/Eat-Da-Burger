@@ -1,47 +1,49 @@
 var express = require('express');
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
+var connection = require('../config/connection.js');
+
 var path = require('path');
+var orm = require('../config/orm.js');
 
 
-var ormFunctions = require('../models/burger.js')
+module.exports = function(app){
 
-module.exports = function(app) {
+// html-routes
+
+    app.get('/index', function (req, res) {
+        
+            orm.selectAll('burgers');
+                
+                res.render('index', {               
+                   burgers: res
+                }); //  end res.render
+         
+    }); // end  app.get
 
 
-app.get('/', function (req, res) {
-    res.render('index', {
 
-    });
-  
-  };  
+    app.use(function(req, res){
+            orm.selectAll('burgers');
+            
+            res.render('index', {          
+                burgers: res,
+                
+            });     
+    }); 
 
-};
 
+// api-routes
 
-app.post('/create', function(req,res){
+    app.put('/devours/:ident', function (req, res) {
+            orm.updateOne('burgers', req.params.ident);     
+            res.redirect('/index'); 
+    }); // end  app.post
     
-    connection.query('INSERT INTO quotes (author, quote) VALUES (?, ?)', [req.body.author, req.body.quote], function(err, result) {
-      if (err) throw err;
-      res.redirect('/');
-    });
-});
-
-app.put('/update', function(req,res){
-    console.log('id: ' + req.body.id);
-    console.log('author: ' + req.body.author);
-    console.log('quote: ' + req.body.quote);
-    connection.query('UPDATE quotes SET author = ?, quote = ? WHERE id = ?', [req.body.author, req.body.quote, req.body.id], function(err, result) {
-      if (err) throw err;
-      res.redirect('/');
-    });
-});
+    app.post('/addBurger', function (req, res) {
+        orm.insertOne('burgers', 'addedBurger');
+        res.redirect('/index'); 
+    }); // end  app.post
 
 
-app.delete('/delete', function(req,res){
-    
-    connection.query('DELETE FROM quotes WHERE id = ?', [req.body.id], function(err, result) {
-      if (err) throw err;
-      res.redirect('/');
-    });
-});
+}; // end module.exports

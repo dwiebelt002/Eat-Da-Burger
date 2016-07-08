@@ -1,27 +1,32 @@
-var connection = require('./connection.js');
+var connection = require('../config/connection.js');
 
 // object relational mapper (ORM)
 
 var orm = {
-    selectAll: function(tableInput, colToSearch, valOfCol) {
-        var queryString = 'SELECT * FROM ' + tableInput + ' WHERE ' + colToSearch + ' = ?';
-        connection.query(queryString, [valOfCol], function(err, result) {
-            console.log(result);
+    selectAll: function(tableSelected) {
+        var queryString = 'SELECT * FROM ' + tableSelected;
+        connection.query(queryString, function(err, result) {
+            return result;
+
         });
     },
-    insertOne: function(whatToSelect, table, orderCol, orderBy) {
-        var queryString = 'SELECT ' + whatToSelect + ' FROM ' + table + ' ORDER BY '+ orderCol + ' ' + orderBy;
-        console.log(queryString)
+    
+    insertOne: function(tableToInsert, burgerName) {
+        var queryString = 'INSERT INTO ' + tableToInsert + ' (burger_name, devoured, date) VALUES (' + burgerName + ', false, now())';
         connection.query(queryString, function(err, result) {
-            console.log(result);
+            return result;
         });
     },
-    updateOne: function(tableOneCol, tableTwoForeignKey, tableOne, tableTwo) {
-        var queryString = 'SELECT ' + tableOneCol + ', COUNT(' + tableOneCol + ') AS count FROM ' + tableOne + ' LEFT JOIN ' + tableTwo + ' ON ' + tableTwo + '.' + tableTwoForeignKey + '= ' + tableOne + '.id GROUP BY ' + tableOneCol + ' ORDER BY count desc LIMIT 1';
-        connection.query(queryString, function(err, result) {
-            console.log(result);
+
+    updateOne: function(tableToUpdate, valKey) {
+        var queryString = 'UPDATE ' + tableToUpdate + ' SET devoured = false WHERE id = ?';
+        connection.query(queryString, [valKey], function(err, result) {
+            return result;
+
         });
     }
 };
 
 module.exports = orm;
+
+//  `selectAll()`, `insertOne()`, `updateOne()`

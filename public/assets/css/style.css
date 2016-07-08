@@ -1,3 +1,61 @@
-body {
-	background-color: #FF8C00;
+html {
+	margin: 0 auto;
+	background: lightgreen;
+	text-align: center;
+	max-width: 850px;
+}
+
+
+h1 {
+	color: #330099;
+	font-family: Comic SANS MS, cursive;
+}
+
+li {
+  position: relative;
+  background: white;
+  margin: 5px;
+  padding: 5px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.create-update-form {
+  background: grey;
+  margin: 5px;
+  padding: 5px;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+.devourButton {
+	width: auto;
+	height: auto;
+	border-radius: 5px;
+	position: sticky;
+	float: auto;
+}
+
+
+button {
+	width: auto;
+	height: auto;
+	border-radius: 5px;
+}
+
+#burgerimg {
+	width: 200px;
+}
+
+.eaten, .notEaten {
+	width: 300px;
+	height: auto;
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
+
 }
