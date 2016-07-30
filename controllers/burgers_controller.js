@@ -1,49 +1,37 @@
 var express = require('express');
-var methodOverride = require('method-override');
-var bodyParser = require('body-parser');
-var connection = require('../config/connection.js');
+var router = express.Router();
+var burger = require('../models/burger.js');
 
-var path = require('path');
-var orm = require('../config/orm.js');
+//get route -> index
+router.get('/', function(req,res) {
+        res.redirect('/burgers')
+});
 
+router.get('/burgers', function(req,res) {
+    //express callback response by calling burger.selectAllBurger
+    burger.all(function(burger_data){
+        //wrapper for orm.js that using MySQL query callback will return burger_data, render to index with handlebar
+        res.render('index', {burger_data});
+    });
+});
 
-module.exports = function(app){
+//post route -> back to index
+router.post('/burgers/create', function(req, res) {
+    //takes the request object using it as input for buger.addBurger
+    burger.create(req.body.burger_name, function(result){
+        //wrapper for orm.js that using MySQL insert callback will return a log to console, render back to index with handle
+        console.log(result);
+        res.redirect('/');
+    });
+});
 
-// html-routes
+//put route -> back to index
+router.put('/burgers/update', function(req,res){
+    burger.update(req.body.burger_id, function(result){
+        //wrapper for orm.js that using MySQL update callback will return a log to console, render back to index with handle
+        console.log(result);
+        res.redirect('/');
+    });
+});
 
-    app.get('/index', function (req, res) {
-        
-            orm.selectAll('burgers');
-                
-                res.render('index', {               
-                   burgers: res
-                }); //  end res.render
-         
-    }); // end  app.get
-
-
-
-    app.use(function(req, res){
-            orm.selectAll('burgers');
-            
-            res.render('index', {          
-                burgers: res,
-                
-            });     
-    }); 
-
-
-// api-routes
-
-    app.put('/devours/:ident', function (req, res) {
-            orm.updateOne('burgers', req.params.ident);     
-            res.redirect('/index'); 
-    }); // end  app.post
-    
-    app.post('/addBurger', function (req, res) {
-        orm.insertOne('burgers', 'addedBurger');
-        res.redirect('/index'); 
-    }); // end  app.post
-
-
-}; // end module.exports
+module.exports = router;

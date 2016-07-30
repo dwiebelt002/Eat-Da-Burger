@@ -1,29 +1,18 @@
 var orm = require('../config/orm.js');
 
-/* The following commands will run every time the app gets started.*/
-
-
-module.exports = function(app){
-
-
-		orm.selectAll('burgers', function (res) {
-			res.render('index', {	       
-	            burgers: res,            
-        	});
+var burger = {
+	all: function(cb) {
+		orm.all('burgers', function(res){
+			cb(res)
 		});
-	        
-	     
-		
-		orm.updateOne('burgers', 'req.params.ident', function (res) {
-			res.redirect('/index');
-		});		
-			     
-	
-		
-		
-		orm.insertOne('burgers', 'addedBurger', function (res) {
-			res.redirect('/index'); 
-		});
-		   
-}; // end module.exports = function(app){
+	},
+	create: function(name,cb) {
+		orm.create('burgers', ['burger_name', 'devoured'], [name, false], cb);
+	},
+	update: function(id, cb) {
+		var condition = 'id=' + id;
+		orm.update('burgers', {devoured : true}, condition, cb);
+	}
+};
 
+module.exports = burger;

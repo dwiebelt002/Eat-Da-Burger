@@ -1,61 +1,63 @@
-html {
-	margin: 0 auto;
-	background: lightgreen;
-	text-align: center;
-	max-width: 850px;
+body {
+  width: 99%;
+  height: 900px;
+  background-color: #ffcc66;
+}
+#top-bar {
+	margin-top: 28px;
+}
+.spacing-reset {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+.list-reset {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.text-center {
+    margin: auto;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 990px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 990px;
+  }
+}
+
+.enter_section {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+#enter_text {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin: auto;
+	width: 400px;
+	height: 80px;
+  font-size: 38px
+}
+.task {
+	border-style: solid;
+	border-color: black;
+	border-width: 3px;
+}
+.button-size {
+	padding-bottom: 20px;
+}
+#text-enter-button {
+	margin-top: 10px;
+	margin-bottom: 18px;
+}
 
 h1 {
-	color: #330099;
-	font-family: Comic SANS MS, cursive;
-}
-
-li {
-  position: relative;
-  background: white;
-  margin: 5px;
-  padding: 5px;
-}
-
-.label {
-  font-weight: bold;
-}
-
-.create-update-form {
-  background: grey;
-  margin: 5px;
-  padding: 5px;
-}
-
-.form-group {
-  margin-bottom: 5px;
-}
-
-.devourButton {
-	width: auto;
-	height: auto;
-	border-radius: 5px;
-	position: sticky;
-	float: auto;
-}
-
-
-button {
-	width: auto;
-	height: auto;
-	border-radius: 5px;
-}
-
-#burgerimg {
-	width: 200px;
-}
-
-.eaten, .notEaten {
-	width: 300px;
-	height: auto;
-	position: relative;
-	margin: 0 auto;
-	text-align: left;
-
+  color: #ff3300;
 }
